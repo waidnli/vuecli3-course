@@ -1,0 +1,53 @@
+## 使用Vue-Cli3 创建一个项目
+1、 使用vue UI创建、管理项目
+2、 项目结构目录整理
+3、 初始文件添加
+4、 基本配置讲解
+5、 跨域配置
+
+## 路由详解（一）
+1、router-link和router-view组件
+2、路由配置
+	a.动态路由
+		path: '/argu/:name'
+		$route.params.name
+	b.嵌套路由
+		path: '/parent'
+		children: [
+			{
+				path: 'child'		-> 不需要加/ 
+			}
+		]
+	c.命名路由
+		path: '/about',
+		name: 'about'
+		
+		<router-link v-bind:to="{ name: 'about' }">
+		
+	d.命名视图
+		path: '/name_view',
+		components: {
+		  default: () => import('@/views/Child.vue'),
+		  email: () => import('@/views/Email.vue'),
+		  tel: () => import('@/views/Tel.vue')
+		}
+3、JS操作路由
+4、重定向和别名
+	a.重定向
+		path: '/main',
+		redirect: '/'
+	b.别名
+		alias: '/home_page',
+		
+**编程式导航**
+
+## 路由详解（二）
+1、路由组件传参
+2、HTML5 History模式
+3、导航守卫
+4、路由元信息
+5、过渡效果
+	
+	
+	
+	
