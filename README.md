@@ -161,7 +161,7 @@ git push origin <branch>
 ```
     
 ## Vuex
-* state/getter
+### state/getter
 ```
     import {mapState, mapGetters} from 'vuex'
     computed: {
@@ -175,3 +175,80 @@ git push origin <branch>
         ])
     }
 ```
+
+### mutation
+* 
+```
+const mutations = {
+  SET_APP_NAME (state, params) {
+    state.appName = params
+  }
+}
+
+...mutations
+
+methods: {
+    changeUserName () {
+      this.SET_USER_NAME('vue-course')
+    }
+}
+
+```
+
+### action
+* 一般放异步操作(ajax获取的state)
+* promise 
+.then().catch
+```
+    // api/app.js
+    export const getAppName = () => {
+      return new Promise((resolve, reject) => {
+        const err = null
+        setTimeout(() => {
+          if (!err) resolve({ code: 200, info: { appName: 'newAppName' } })
+          else reject(err)
+        })
+      })
+    }
+
+    // actions.js
+    updateAppName ({ commit }) {
+        getAppName().then(res => {
+          // console.log(res)
+          // commit('SET_APP_NAME', res.info.appName)
+          // es6
+          const { info: { appName } } = res
+          commit('SET_APP_NAME', appName)
+        }).catch(err => {
+          console.log(err)
+        })
+    }
+```
+
+* async await
+```
+    async updateAppName ({ commit }) {
+        try {
+          const { info: { appName } } = await getAppName()
+          commit('SET_APP_NAME', appName)
+        } catch (e) {
+          console.log(e)
+        }
+    }
+```
+
+# ajax请求
+### 解决跨域问题
+* 存在跨域问题
+    * 同一域名不同端口
+    * 域名和域名对应IP
+    * 主域相同，子域不同
+    * 同一域名，不同二级域名
+    * 不同域名
+
+### 封装axios
+* 请求拦截
+* 相应拦截
+
+### 请求实战
+
