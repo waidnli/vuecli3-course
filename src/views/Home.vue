@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    {{ food }}
     <button @click="handleClick('back')">返回上一页</button>
     <button @click="handleClick('push')">跳转到Parent</button>
     <button @click="handleClick('replace')">替换到Parent</button>
@@ -15,6 +16,30 @@ export default {
   components: {
     HelloWorld
   },
+  props: {
+    food: {
+      type: String,
+      default: 'apple'
+    }
+  },
+  // hook函数 beforeRouteEnter\beforeRouteLeave\beforeRouteUpdate...
+  beforeRouteEnter (to, from, next) {
+    // console.log(from.name)
+    next(vm => {
+      console.log(vm)
+    })
+  },
+  beforeRouteLeave (to, from, next) {
+    const leave = confirm('您确定要离开吗')
+    if (leave) next()
+    else next(false)
+  },
+  // beforeEnter: (to, from, next) => {
+  // if (from.name === 'about') alert('这是从about页来的')
+  // else alert('这不是about页来的')
+  // // 一定要调用next() 否则不会跳转
+  //   next()
+  // }
   methods: {
     handleClick (type) {
       if (type === 'back') this.$router.back()

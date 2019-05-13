@@ -135,3 +135,43 @@ git push origin <branch>
 * 以在你的工作目录中 获取（fetch） 并 合并（merge） 远端的改动。要合并其他分支到你的当前分支（例如 master）
 
     `git merge <branch>`
+
+# 状态管理器
+
+## Bus
+* bus.js
+```
+    import Vue from 'vue'
+    const Bus = new Vue()
+    export default Bus
+```    
+
+* main.js
+```
+    import Bus from './libs/bus'
+    Vue.prototype.$bus = Bus
+```
+
+* .vue
+```
+   this.$bus.$emit('on-click', 'hhhhh')
+   this.$bus.$on（'on-click', mes => {
+    this.message = mes
+   })
+```
+    
+## Vuex
+* state/getter
+```
+    import {mapState, mapGetters} from 'vuex'
+    computed: {
+        ...mapState({
+            appName: state => state.appName,
+            userName: state => state.user.userName
+        }),
+        ...mapGetters([
+            'appNameWithVersion',
+            'firstLetter'
+        ])
+    }
+```
